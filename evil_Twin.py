@@ -10,7 +10,7 @@ interface = options.interface
 
 if interface:
     # [@] Configure INTERFACE [@]
-    subprocess.call('sudo ifconfig wlan0mon 10.0.0.1 netmask 255.255.255,0', shell=True)
+    subprocess.call(f'sudo ifconfig {interface} 10.0.0.1 netmask 255.255.255.0', shell=True)
     print(f'{interface} runnning on 10.0.0.1 netmask 255.255.255,0 [+]')
     # [+] [+] [+] Setup NAT [+] [+] [+]
     subprocess.call('sudo iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE', shell=True)
@@ -26,3 +26,4 @@ if interface:
     subprocess.call('sudo dnsmasq -C ~/Desktop/evil_twin/dnsmaq.conf -d', shell=True)
 else:
     print('[@] Eter Interface [@]')
+
